@@ -221,6 +221,15 @@ int32_t TX_freq_check(const uint32_t Frequency)
 				return 0;
 			break;
 
+                case F_LOCK_CE_PMR446:
+                        if (Frequency >= 14400000 && Frequency < 14600000)
+				return 0;
+			if (Frequency >= 43000000 && Frequency < 44000000)
+				return 0;
+                        if (Frequency >= 44600625 && Frequency < 44619375)
+                                return 0;
+			break;
+
 		case F_LOCK_GB:
 			if (Frequency >= 14400000 && Frequency < 14800000)
 				return 0;
