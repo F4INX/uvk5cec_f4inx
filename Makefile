@@ -221,8 +221,15 @@ AUTHOR_STRING ?= KD8CEC_FROM_SOURCE_CODE_EGZUMER
 # can set own version string here (max 7 chars)
 
 # CHANGE VERSION TYPE
-# Changed for compatibility with Chirp
-VERSION_STRING ?= "EGZUMER CEC 0.1c"
+VERSION_STRING ?= "CEC_F4INX_0.1c"
+
+#################### ADDED BY F4INX #####################
+
+# Added for compatibility with Chirp
+# Must begin by "EGZUMER " and fit in 15 chars (16 incl '\0').
+UART_VERSION_STRING ?= "EGZUMER CEC INX"
+
+################ END OF ADDED BY F4INX ##################
 
 
 ASFLAGS = -c -mcpu=cortex-m0
@@ -259,6 +266,13 @@ CFLAGS += -Wextra
 
 CFLAGS += -DPRINTF_INCLUDE_CONFIG_H
 CFLAGS += -DAUTHOR_STRING=\"$(AUTHOR_STRING)\" -DVERSION_STRING=\"$(VERSION_STRING)\"
+
+#################### ADDED BY F4INX #####################
+
+# Added for compatibility with Chirp
+CFLAGS += -DUART_VERSION_STRING=\"$(UART_VERSION_STRING)\"
+
+################ END OF ADDED BY F4INX ##################
 
 ifeq ($(ENABLE_SPECTRUM),1)
 CFLAGS += -DENABLE_SPECTRUM
