@@ -153,7 +153,7 @@ extern const char        gSubMenu_D_RSP[4][11];
 extern const char gSubMenu_LIVESEEK[3][6];
 
 extern const char* const gSubMenu_PTT_ID[5];
-extern const char        gSubMenu_PONMSG[5][10];
+extern const char gSubMenu_PONMSG[POWER_ON_DISPLAY_MODE_LEN][10];  // FIXME: 10 can be replaced by 8 when ENABLE_START_LOGO disabled.
 extern const char        gSubMenu_ROGER[3][6];
 extern const char        gSubMenu_RESET[2][4];
 extern const char* const gSubMenu_F_LOCK[F_LOCK_LEN];

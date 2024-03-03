@@ -47,6 +47,9 @@ ENABLE_BYP_RAW_DEMODULATORS   ?= 0
 ENABLE_BLMIN_TMP_OFF          ?= 0
 ENABLE_SCAN_RANGES            ?= 1
 
+# ---- F4INX MODS ----
+ENABLE_START_LOGO             ?= 1
+
 # ---- DEBUGGING ----
 ENABLE_AM_FIX_SHOW_DATA       ?= 0
 ENABLE_AGC_SHOW_DATA          ?= 0
@@ -182,7 +185,9 @@ OBJS += ui/ui.o
 OBJS += ui/welcome.o
 OBJS += version.o
 OBJS += main.o
-OBJS += logo/logo.o  # FIXME: put define.
+ifeq ($(ENABLE_START_LOGO),1)
+	OBJS += logo/logo.o
+endif
 
 ifeq ($(OS), Windows_NT) # windows
     TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -414,6 +419,11 @@ ifeq ($(ENABLE_TX_STOP_BY_CHIPRANGE),1)
 endif
 ifeq ($(ENABLE_HAMBAND_TX_CONTROL),1)
 	CFLAGS  += -DENABLE_HAMBAND_TX_CONTROL
+endif
+
+# ---- F4INX features ----
+ifeq ($(ENABLE_START_LOGO),1)
+	CFLAGS  += -DENABLE_START_LOGO
 endif
 
 # ---- END OF Option

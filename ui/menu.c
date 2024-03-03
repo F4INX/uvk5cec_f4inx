@@ -277,7 +277,9 @@ const char gSubMenu_PONMSG[][10] =
 	"FULL",
 	"MESSAGE",
 	"VOLTAGE",
-        "VOLT+LOGO",
+        #ifdef ENABLE_START_LOGO
+                "VOLT+LOGO",
+        #endif
 	"NONE"
 };
 
