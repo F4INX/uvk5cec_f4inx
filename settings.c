@@ -115,13 +115,13 @@ void SETTINGS_InitEEPROM(void)
 	EEPROM_ReadBuffer(0x0E90, Data, 8);
 	gEeprom.BEEP_CONTROL                 = Data[0] & 1;
 	gEeprom.KEY_M_LONG_PRESS_ACTION      = ((Data[0] >> 1) < ACTION_OPT_LEN) ? (Data[0] >> 1) : ACTION_OPT_NONE;
-	gEeprom.KEY_1_SHORT_PRESS_ACTION     = (Data[1] < ACTION_OPT_LEN) ? Data[1] : ACTION_OPT_MONITOR;
-	gEeprom.KEY_1_LONG_PRESS_ACTION      = (Data[2] < ACTION_OPT_LEN) ? Data[2] : ACTION_OPT_NONE;
-	gEeprom.KEY_2_SHORT_PRESS_ACTION     = (Data[3] < ACTION_OPT_LEN) ? Data[3] : ACTION_OPT_SCAN;
-	gEeprom.KEY_2_LONG_PRESS_ACTION      = (Data[4] < ACTION_OPT_LEN) ? Data[4] : ACTION_OPT_NONE;
-	gEeprom.SCAN_RESUME_MODE             = (Data[5] < 3)              ? Data[5] : SCAN_RESUME_CO;
-	gEeprom.AUTO_KEYPAD_LOCK             = (Data[6] < 2)              ? Data[6] : false;
-	gEeprom.POWER_ON_DISPLAY_MODE        = (Data[7] < 4)              ? Data[7] : POWER_ON_DISPLAY_MODE_VOLTAGE_LOGO;
+	gEeprom.KEY_1_SHORT_PRESS_ACTION     = (Data[1] < ACTION_OPT_LEN)            ? Data[1] : ACTION_OPT_MONITOR;
+	gEeprom.KEY_1_LONG_PRESS_ACTION      = (Data[2] < ACTION_OPT_LEN)            ? Data[2] : ACTION_OPT_NONE;
+	gEeprom.KEY_2_SHORT_PRESS_ACTION     = (Data[3] < ACTION_OPT_LEN)            ? Data[3] : ACTION_OPT_SCAN;
+	gEeprom.KEY_2_LONG_PRESS_ACTION      = (Data[4] < ACTION_OPT_LEN)            ? Data[4] : ACTION_OPT_NONE;
+	gEeprom.SCAN_RESUME_MODE             = (Data[5] < 3)                         ? Data[5] : SCAN_RESUME_CO;
+	gEeprom.AUTO_KEYPAD_LOCK             = (Data[6] < 2)                         ? Data[6] : false;
+	gEeprom.POWER_ON_DISPLAY_MODE        = (Data[7] < POWER_ON_DISPLAY_MODE_LEN) ? Data[7] : POWER_ON_DISPLAY_MODE_VOLTAGE_LOGO;
 
 	// 0E98..0E9F
 	EEPROM_ReadBuffer(0x0E98, Data, 8);
