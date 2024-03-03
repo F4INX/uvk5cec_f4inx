@@ -272,11 +272,12 @@ const char* const gSubMenu_PTT_ID[] =
 	"APOLLO\nQUINDAR"
 };
 
-const char gSubMenu_PONMSG[][8] =
+const char gSubMenu_PONMSG[][10] =
 {
 	"FULL",
 	"MESSAGE",
 	"VOLTAGE",
+        "VOLT+LOGO",
 	"NONE"
 };
 

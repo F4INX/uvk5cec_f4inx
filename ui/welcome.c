@@ -26,6 +26,7 @@
 #include "ui/welcome.h"
 #include "ui/status.h"
 #include "version.h"
+#include "logo/logo.h"
 
 void UI_DisplayReleaseKeys(void)
 {
@@ -53,7 +54,7 @@ void UI_DisplayWelcome(void)
 		memset(WelcomeString0, 0, sizeof(WelcomeString0));
 		memset(WelcomeString1, 0, sizeof(WelcomeString1));
 
-		if (gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_VOLTAGE)
+		if (gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_VOLTAGE || gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_VOLTAGE_LOGO)
 		{
 			strcpy(WelcomeString0, "VOLTAGE");
 			sprintf(WelcomeString1, "%u.%02uV %u%%",
@@ -67,9 +68,41 @@ void UI_DisplayWelcome(void)
 			EEPROM_ReadBuffer(0x0EC0, WelcomeString1, 16);
 		}
 
-		UI_PrintString(WelcomeString0, 0, 127, 0, 10);
-		UI_PrintString(WelcomeString1, 0, 127, 2, 10);
-		UI_PrintStringSmallNormal(Version, 0, 128, 6);
+                if (gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_VOLTAGE) {
+                        UI_PrintString(WelcomeString0, 0, 127, 0, 10);
+                        UI_PrintString(WelcomeString1, 0, 127, 2, 10);
+                        UI_PrintStringSmallNormal(Version, 0, 128, 6);
+                }
+                else {  /* POWER_ON_DISPLAY_MODE_VOLTAGE_LOGO */
+                        int x = 0;
+                        int y = 0;
+                        for (int i = 0; LOGO_RLE[i] != '\0'; i++) {
+                                bool color = (LOGO_RLE[i] & 0b10000000) != 0;
+                                int num = (LOGO_RLE[i] & 0b01111111);
+                                for (int j = 0; j < num; j++) {
+                                        /* If black sequence */
+                                        if (color) {
+                                                /* Status line */
+                                                if (y < 8) {
+                                                        UI_DrawPixelBuffer(gStatusLine, x, y, true);
+                                                }
+                                                /* Remaining of the screen */
+                                                else {
+                                                        UI_DrawPixelBuffer(gFrameBuffer, x, y-8, true);
+                                                }
+                                        }
+                                        /* Next pixel */
+                                        x++;
+                                        if (x >= LCD_WIDTH) {
+                                                x = 0;
+                                                y++;
+                                        }
+                                }
+                        }
+                        UI_PrintStringSmallNormal(WelcomeString0, 0, 128, 4);
+                        UI_PrintStringSmallNormal(WelcomeString1, 0, 128, 5);
+                        UI_PrintStringSmallNormal(Version, 0, 128, 6);
+                }
 
 		ST7565_BlitStatusLine();  // blank status line
 		ST7565_BlitFullScreen();

@@ -182,6 +182,7 @@ OBJS += ui/ui.o
 OBJS += ui/welcome.o
 OBJS += version.o
 OBJS += main.o
+OBJS += logo/logo.o  # FIXME: put define.
 
 ifeq ($(OS), Windows_NT) # windows
     TOP := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
