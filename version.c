@@ -1,18 +1,12 @@
-
 #ifdef VERSION_STRING
-	#define VER      VERSION_STRING
+        const char Version[] = VERSION_STRING;
 #else
-	#define VER      ""
+        const char Version[] = "";
 #endif
 
-/* Different than Version for compatibility with Chirp, F4INX. */
+/* Option to make it different than Version */
+/* for compatibility with Chirp, F4INX.     */
 #ifdef UART_VERSION_STRING
-        #define UART_VER UART_VERSION_STRING
-#else
-        #define UART_VER ""
+        const char UARTVersion[] = UART_VERSION_STRING;
 #endif
-
-
-const char Version[]      = VER;
-const char UARTVersion[]  = UART_VER;
-
+/* Else, #define in version.h */
