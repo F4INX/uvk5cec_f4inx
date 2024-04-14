@@ -49,6 +49,9 @@ ENABLE_SCAN_RANGES            ?= 1
 
 # ---- F4INX MODS ----
 ENABLE_START_LOGO             ?= 1
+# Uncomment the wanted logo file
+# LOGO_FILE = logo-f6kgl-f5kff
+LOGO_FILE = logo-f6kgl-f5kff-f4inx
 
 # ---- DEBUGGING ----
 ENABLE_AM_FIX_SHOW_DATA       ?= 0
@@ -185,8 +188,9 @@ OBJS += ui/ui.o
 OBJS += ui/welcome.o
 OBJS += version.o
 OBJS += main.o
+# ---- F4INX MODS ----
 ifeq ($(ENABLE_START_LOGO),1)
-	OBJS += logo/logo.o
+	OBJS += logo/$(LOGO_FILE).o
 endif
 
 ifeq ($(OS), Windows_NT) # windows
