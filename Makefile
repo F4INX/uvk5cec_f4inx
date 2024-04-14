@@ -505,12 +505,21 @@ bsp/dp32g030/%.h: hardware/dp32g030/%.def
 %.o: %.S
 	$(AS) $(ASFLAGS) $< -o $@
 
+#################### ADDED BY F4INX #####################
+
+# FIXME: Smarter than blind copy
+logo/logo-%.c: logo/logo-%.png
+	python3 logo/make_logo_c.py $<
+
+################ END OF ADDED BY F4INX ##################
+
 .FORCE:
 
 -include $(DEPS)
 
+# Added by F4INX: logo/logo-*.c
 clean:
-	$(RM) $(call FixPath, $(TARGET).bin $(TARGET).packed.bin $(TARGET) $(OBJS) $(DEPS))
+	$(RM) $(call FixPath, $(TARGET).bin $(TARGET).packed.bin $(TARGET) $(OBJS) $(DEPS) logo/logo-*.c)
 
 doxygen:
 	doxygen

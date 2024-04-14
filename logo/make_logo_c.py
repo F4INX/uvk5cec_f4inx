@@ -6,7 +6,9 @@ Hadrien F4INX Theveneau, 2024
 """
 
 import textwrap
+from pathlib import Path
 from datetime import datetime
+import argparse
 from PIL import Image
 
 
@@ -90,7 +92,17 @@ def make_c_image(image_png_path, image_c_path):
             char * LOGO_RLE = {logo_rlc};
         """))
 
+def main():
+    parser = argparse.ArgumentParser(
+                    prog="make_logo_c",
+                    description="Makes a RLE compressed c file from a png file")
+    parser.add_argument('filename')
+    args = parser.parse_args()
+    input_filename = args.filename
+    output_filename = Path(input_filename).with_suffix('.c')
+    make_c_image(input_filename, output_filename)
 
 if __name__ == '__main__':
-    make_c_image('logo-f6kgl-f5kff.png', 'logo-f6kgl-f5kff.c')
-    make_c_image('logo-f6kgl-f5kff-f4inx.png', 'logo-f6kgl-f5kff-f4inx.c')
+    # make_c_image('logo-f6kgl-f5kff.png', 'logo-f6kgl-f5kff.c')
+    # make_c_image('logo-f6kgl-f5kff-f4inx.png', 'logo-f6kgl-f5kff-f4inx.c')
+    main()
