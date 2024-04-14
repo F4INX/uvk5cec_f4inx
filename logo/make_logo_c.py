@@ -88,7 +88,7 @@ def make_c_image(image_png_path, image_c_path):
 
 
 # Now let's call the function with the provided image
-image_png_path = 'f6kgl-f5kff.png'
+image_png_path = 'f6kgl-f5kff-f4inx.png'
 image_c_path = 'logo.c'
 # for byte in islice(rle_compressor(image_path), 10):  # Show the first 10 bytes of compressed data for brevity
 #     print(f"0b{byte:08b}")
