@@ -50,8 +50,8 @@ ENABLE_SCAN_RANGES            ?= 1
 # ---- F4INX MODS ----
 ENABLE_START_LOGO             ?= 1
 # Uncomment the wanted logo file
-# LOGO_FILE = logo-f6kgl-f5kff
-LOGO_FILE = logo-f6kgl-f5kff-f4inx
+LOGO_FILE = logo-f6kgl-f5kff
+# LOGO_FILE = logo-f6kgl-f5kff-f4inx
 
 # ---- DEBUGGING ----
 ENABLE_AM_FIX_SHOW_DATA       ?= 0
