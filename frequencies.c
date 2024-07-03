@@ -175,13 +175,13 @@ int32_t TX_freq_check(const uint32_t Frequency)
 		if (gSetting_200TX)
 			return 0;
 
-	if (gSetting_500TX && Frequency > 90200000 && Frequency < 92800000)
+	if (gSetting_500TX && Frequency >= 90200000 && Frequency <= 92800000)
 		return 0;
 
-	if (gSetting_350TX && Frequency > 127000000 && Frequency < 129500000)
+	if (gSetting_350TX && Frequency >= 127000000 && Frequency <= 129500000)
 		return 0;
 
-	if (gSetting_350EN && Frequency > 126000000 && Frequency < 130000000)
+	if (gSetting_350EN && Frequency >= 126000000 && Frequency <= 130000000)
 		return 0;
 #endif
 
@@ -202,52 +202,52 @@ int32_t TX_freq_check(const uint32_t Frequency)
 			if (Frequency >= frequencyBandTable[BAND7_470MHz].lower && Frequency <= 60000000)
 				if (gSetting_500TX)
 					return 0;
-			if (gSetting_500TX && Frequency > 120000000 && Frequency < 123000000)
+			if (gSetting_500TX && Frequency >= 120000000 && Frequency <= 123000000)
 				return 0;
 #endif				
 			break;
 
 		case F_LOCK_FCC:
-			if (Frequency >= 14400000 && Frequency < 14800000)
+			if (Frequency >= 14400000 && Frequency <= 14800000)
 				return 0;
-			if (Frequency >= 42000000 && Frequency < 45000000)
+			if (Frequency >= 42000000 && Frequency <= 45000000)
 				return 0;
 			break;
 
 		case F_LOCK_CE:
-			if (Frequency >= 14400000 && Frequency < 14600000)
+			if (Frequency >= 14400000 && Frequency <= 14600000)
 				return 0;
-			if (Frequency >= 43000000 && Frequency < 44000000)
+			if (Frequency >= 43000000 && Frequency <= 44000000)
 				return 0;
 			break;
 
-                case F_LOCK_CE_PMR446:
-                        if (Frequency >= 14400000 && Frequency < 14600000)
+        case F_LOCK_CE_PMR446:
+            if (Frequency >= 14400000 && Frequency <= 14600000)
+                return 0;
+			if (Frequency >= 43000000 && Frequency <= 44000000)
 				return 0;
-			if (Frequency >= 43000000 && Frequency < 44000000)
-				return 0;
-                        if (Frequency >= 44600625 && Frequency < 44619375)
-                                return 0;
+            if (Frequency >= 44600625 && Frequency <= 44619375)
+                return 0;
 			break;
 
 		case F_LOCK_GB:
-			if (Frequency >= 14400000 && Frequency < 14800000)
+			if (Frequency >= 14400000 && Frequency <= 14800000)
 				return 0;
-			if (Frequency >= 43000000 && Frequency < 44000000)
+			if (Frequency >= 43000000 && Frequency <= 44000000)
 				return 0;
 			break;
 
 		case F_LOCK_430:
-			if (Frequency >= frequencyBandTable[BAND3_137MHz].lower && Frequency < 17400000)
+			if (Frequency >= frequencyBandTable[BAND3_137MHz].lower && Frequency <= 17400000)
 				return 0;
-			if (Frequency >= 40000000 && Frequency < 43000000)
+			if (Frequency >= 40000000 && Frequency <= 43000000)
 				return 0;
 			break;
 
 		case F_LOCK_438:
-			if (Frequency >= frequencyBandTable[BAND3_137MHz].lower && Frequency < 17400000)
+			if (Frequency >= frequencyBandTable[BAND3_137MHz].lower && Frequency <= 17400000)
 				return 0;
-			if (Frequency >= 40000000 && Frequency < 43800000)
+			if (Frequency >= 40000000 && Frequency <= 43800000)
 				return 0;
 			break;
 
