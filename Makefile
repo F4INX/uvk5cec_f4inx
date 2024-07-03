@@ -49,6 +49,9 @@ ENABLE_SCAN_RANGES            ?= 1
 
 # ---- F4INX MODS ----
 ENABLE_START_LOGO             ?= 1
+# Uncomment the wanted logo file
+LOGO_FILE = logo-f6kgl-f5kff
+# LOGO_FILE = logo-f6kgl-f5kff-f4inx
 
 # ---- DEBUGGING ----
 ENABLE_AM_FIX_SHOW_DATA       ?= 0
@@ -185,8 +188,9 @@ OBJS += ui/ui.o
 OBJS += ui/welcome.o
 OBJS += version.o
 OBJS += main.o
+# ---- F4INX MODS ----
 ifeq ($(ENABLE_START_LOGO),1)
-	OBJS += logo/logo.o
+	OBJS += logo/$(LOGO_FILE).o
 endif
 
 ifeq ($(OS), Windows_NT) # windows
@@ -501,12 +505,21 @@ bsp/dp32g030/%.h: hardware/dp32g030/%.def
 %.o: %.S
 	$(AS) $(ASFLAGS) $< -o $@
 
+#################### ADDED BY F4INX #####################
+
+# FIXME: Smarter than blind copy
+logo/logo-%.c: logo/logo-%.png
+	python3 logo/make_logo_c.py $<
+
+################ END OF ADDED BY F4INX ##################
+
 .FORCE:
 
 -include $(DEPS)
 
+# Added by F4INX: logo/logo-*.c
 clean:
-	$(RM) $(call FixPath, $(TARGET).bin $(TARGET).packed.bin $(TARGET) $(OBJS) $(DEPS))
+	$(RM) $(call FixPath, $(TARGET).bin $(TARGET).packed.bin $(TARGET) $(OBJS) $(DEPS) logo/logo-*.c)
 
 doxygen:
 	doxygen

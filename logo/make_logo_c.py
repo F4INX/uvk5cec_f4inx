@@ -5,8 +5,10 @@ Logo RLE packer.
 Hadrien F4INX Theveneau, 2024
 """
 
-# from itertools import islice
 import textwrap
+from pathlib import Path
+from datetime import datetime
+import argparse
 from PIL import Image
 
 
@@ -83,14 +85,24 @@ def make_c_image(image_png_path, image_c_path):
     with open(image_c_path, 'w', newline='\n') as f:
         logo_rlc = rle_c_string(rle_compressor(image_png_path))
         f.write(textwrap.dedent(f"""\
+            /* Automatically generated code by make_logo_c.py on {datetime.now():%Y-%m-%d %H:%M:%S}. */
+            /* Do no change manually.                                                 */
+            /* All manual changes will be LOST on next run.                           */
+
             char * LOGO_RLE = {logo_rlc};
         """))
 
+def main():
+    parser = argparse.ArgumentParser(
+                    prog="make_logo_c",
+                    description="Makes a RLE compressed c file from a png file")
+    parser.add_argument('filename')
+    args = parser.parse_args()
+    input_filename = args.filename
+    output_filename = Path(input_filename).with_suffix('.c')
+    make_c_image(input_filename, output_filename)
 
-# Now let's call the function with the provided image
-image_png_path = 'f6kgl-f5kff.png'
-image_c_path = 'logo.c'
-# for byte in islice(rle_compressor(image_path), 10):  # Show the first 10 bytes of compressed data for brevity
-#     print(f"0b{byte:08b}")
-# print(rle_c_string(rle_compressor(image_path)))
-make_c_image(image_png_path, image_c_path)
+if __name__ == '__main__':
+    # make_c_image('logo-f6kgl-f5kff.png', 'logo-f6kgl-f5kff.c')
+    # make_c_image('logo-f6kgl-f5kff-f4inx.png', 'logo-f6kgl-f5kff-f4inx.c')
+    main()
