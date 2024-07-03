@@ -18,7 +18,13 @@
 #define VERSION_H
 
 extern const char Version[];
-extern const char UARTVersion[];
 
+/* Option to make it different than Version */
+/* for compatibility with Chirp, F4INX.     */
+#ifdef UART_VERSION_STRING
+        extern const char UARTVersion[];
+#else
+        #define UARTVersion Version
 #endif
 
+#endif

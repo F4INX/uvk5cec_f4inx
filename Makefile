@@ -231,9 +231,9 @@ VERSION_STRING ?= "CEC_F4INX_0.1c"
 
 #################### ADDED BY F4INX #####################
 
-# Added for compatibility with Chirp
+# Uncomment for for compatibility with vanilla Chirp
 # Must begin by "EGZUMER " and fit in 15 chars (16 incl '\0').
-UART_VERSION_STRING ?= "EGZUMER CEC INX"
+# UART_VERSION_STRING ?= "EGZUMER CEC INX"
 
 ################ END OF ADDED BY F4INX ##################
 
@@ -276,7 +276,9 @@ CFLAGS += -DAUTHOR_STRING=\"$(AUTHOR_STRING)\" -DVERSION_STRING=\"$(VERSION_STRI
 #################### ADDED BY F4INX #####################
 
 # Added for compatibility with Chirp
-CFLAGS += -DUART_VERSION_STRING=\"$(UART_VERSION_STRING)\"
+ifdef UART_VERSION_STRING
+	CFLAGS += -DUART_VERSION_STRING=\"$(UART_VERSION_STRING)\"
+endif
 
 ################ END OF ADDED BY F4INX ##################
 
