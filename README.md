@@ -1,3 +1,7 @@
+# UVK5CEC custom firmware fork by F4INX
+
+UVK5CEC custom firmware fork by F4INX. Highly experimental.
+
 # Version 0.1HF (January 19, 2024) - (another version)
 Detailed explanations are provided in the link below.
 http://www.hamskey.com
