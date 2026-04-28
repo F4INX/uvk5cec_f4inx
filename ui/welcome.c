@@ -89,7 +89,7 @@ void UI_DisplayWelcome(void)
                                                 if (color) {
                                                         /* Status line */
                                                         if (y < 8) {
-                                                                UI_DrawPixelBuffer(gStatusLine, x, y, true);
+                                                                UI_DrawPixelBuffer(&gStatusLine, x, y, true);
                                                         }
                                                         /* Remaining of the screen */
                                                         else {
